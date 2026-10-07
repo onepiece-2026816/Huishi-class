@@ -2455,8 +2455,20 @@ app.use((error, _req, res, _next) => {
   res.status(500).json({ message: '服务器错误' });
 });
 
-startTeacherStudioService()
-  .then(() => initializeDatabase())
+// 启动链：备课服务是**可选**能力（依赖 Blender/bpy，服务器环境通常没有），
+// 它挂掉不能让主 API 跟着退出——否则一个可选服务会把整站接口拖死。
+// 数据库则是必需的，失败必须终止启动并暴露问题。
+(async () => {
+  try {
+    await startTeacherStudioService();
+  } catch (error) {
+    console.warn(
+      'Teacher Studio service unavailable, starting API without prep features:',
+      error?.message || error,
+    );
+  }
+  await initializeDatabase();
+})()
   .then(() => {
     startLearningMemoryJobs(() => pool);
     httpServer.listen(PORT, () => {

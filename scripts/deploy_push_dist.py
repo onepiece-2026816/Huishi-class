@@ -83,7 +83,7 @@ def fetch_remote_list(client):
 
     result = {}
     # find -printf 一次拿到 大小\t路径，避免上千次 stat 往返
-    raw = run(f'cd {APP_DIR} && find dist server -maxdepth 2 -type f -printf "%s\\t%p\\n" 2>/dev/null')
+    raw = run(f'cd {APP_DIR} && find dist server -maxdepth 5 -type f -printf "%s\\t%p\\n" 2>/dev/null')
     for line in raw.splitlines():
         parts = line.strip().split('\t')
         if len(parts) != 2:
@@ -190,7 +190,6 @@ def main():
         return
 
     sftp = client.open_sftp()
-    sftp.get_channel().settimeout = lambda *a: None  # 保持长连接不被超时打断
 
     # index.html 放最后传，保证切换原子
     ordered = [x for x in dist_items if x[0] != 'index.html'] + \
