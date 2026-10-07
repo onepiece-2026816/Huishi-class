@@ -1,0 +1,44 @@
+.lesson-export-page { width: 100%; min-width: 0; color: #182a31; }
+.lesson-export-page:is(:fullscreen, .is-expanded) { box-sizing: border-box; width: 100%; height: 100%; min-height: 0; overflow: hidden; background: #f4f7f8; }
+.lesson-export-page:is(:fullscreen, .is-expanded) > .lesson-export-scroll { box-sizing: border-box; width: 100%; height: 100%; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 24px 24px; }
+.lesson-export-page:is(:fullscreen, .is-expanded) .lesson-export-toolbar { position: sticky; top: 0; z-index: 2; background: #f4f7f8; }
+.lesson-export-buttons > .lesson-export-expand { flex: 0 0 38px; width: 38px; height: 38px; padding: 0; justify-content: center; align-self: center; }
+.app-shell.is-integrated .lesson-export-page:is(:fullscreen, .is-expanded) { background: #071522; }
+.app-shell.is-integrated .lesson-export-page:is(:fullscreen, .is-expanded) .lesson-export-toolbar { background: #071522; }
+.app-shell.is-integrated .lesson-export-toolbar h3 { color: #e5f2f6; }
+.lesson-export-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding: 18px 0; border-bottom: 1px solid #d7e1e2; }
+.lesson-export-toolbar h3 { margin: 0 0 5px; color: #152d34; font-size: 20px; }
+.lesson-export-toolbar span { color: #617477; font-size: 13px; }
+.lesson-export-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.lesson-export-state, .lesson-export-error, .teacher-review-status { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 18px auto; padding: 15px 18px; border: 1px solid #d7e2e2; border-radius: 6px; background: #f7faf9; }
+.lesson-export-state { max-width: 794px; justify-content: flex-start; color: #19736b; }
+.lesson-export-state div, .lesson-export-error > div, .teacher-review-status > div { display: grid; gap: 4px; }
+.lesson-export-state span, .teacher-review-status span, .teacher-review-status small { color: #66797b; font-size: 13px; }
+.lesson-export-error { border-color: #e7c7b5; background: #fff9f5; }
+.lesson-export-error p { margin: 3px 0; color: #87452f; }
+.lesson-export-error span { color: #76594d; font-size: 13px; }
+.teacher-review-status { max-width: 980px; flex-wrap: wrap; }
+.teacher-review-status.is-valid { border-color: #b8d9ce; background: #f3faf6; }
+.teacher-review-status.has-errors { border-color: #e6c4b6; background: #fff8f4; }
+.teacher-review-errors { max-width: 940px; margin: 0 auto 16px; color: #923f2e; }
+.lesson-export-paper { box-sizing: border-box; width: 100%; max-width: 850px; margin: 22px auto; padding: 46px 54px; border: 1px solid #dce4e4; border-radius: 4px; background: #fff; color: #20292a; box-shadow: 0 6px 22px #243a3c0d; font-family: SimSun, 'Songti SC', serif; overflow-wrap: anywhere; }
+.lesson-export-paper h1 { margin: 0 0 26px; color: #152f34; font-size: 25px; text-align: center; font-family: SimHei, 'Microsoft YaHei', sans-serif; }
+.lesson-export-paper h2 { margin: 27px 0 12px; padding-bottom: 7px; border-bottom: 1px solid #e1e9e8; color: #235e5a; font-size: 18px; font-family: SimHei, 'Microsoft YaHei', sans-serif; }
+.lesson-export-paper p { margin: 0 0 9px; font-size: 15px; line-height: 1.75; white-space: pre-wrap; }
+.teacher-lesson-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; margin: -12px 0 24px; color: #607173; font-size: 13px; }
+.teacher-lesson-overview { padding: 12px 15px; border-left: 3px solid #4a9990; background: #f4f8f7; }
+.teacher-lesson-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.teacher-process-list { display: grid; gap: 10px; }
+.teacher-process-list article { padding: 13px 15px; border: 1px solid #e0e7e6; border-radius: 4px; background: #fbfcfc; break-inside: avoid; }
+.teacher-process-list header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 9px; color: #235e5a; }
+.teacher-process-list header span { flex: none; color: #66797b; font-size: 13px; }
+.teacher-process-list p { margin-bottom: 6px; }
+.teacher-process-list p b { display: inline-block; min-width: 74px; color: #435b5d; }
+.teacher-lesson-editor { display: grid; gap: 14px; max-width: 980px; margin: 20px auto; }
+.teacher-lesson-editor label { display: grid; gap: 6px; color: #385255; font-size: 13px; font-weight: 600; }
+.teacher-lesson-editor input, .teacher-lesson-editor textarea { box-sizing: border-box; width: 100%; min-width: 0; padding: 10px 12px; border: 1px solid #cbd8d8; border-radius: 4px; background: #fff; color: #1a292b; font: 14px/1.65 SimSun, 'Songti SC', serif; resize: vertical; }
+.teacher-lesson-editor input:focus, .teacher-lesson-editor textarea:focus { outline: 2px solid #78aaa4; outline-offset: 1px; }
+.teacher-lesson-editor fieldset { display: grid; gap: 12px; min-width: 0; margin: 0; padding: 15px; border: 1px solid #d9e3e2; border-radius: 4px; }
+.teacher-lesson-editor legend { padding: 0 7px; color: #235e5a; font-weight: 700; }
+.teacher-lesson-editor h3 { margin: 10px 0 0; font-size: 17px; }
+@media (max-width: 700px) { .lesson-export-paper { padding: 25px 19px; } .lesson-export-buttons { width: 100%; } .lesson-export-buttons > button { flex: 1 1 auto; } .teacher-lesson-pair { grid-template-columns: 1fr; gap: 0; } .lesson-export-error, .teacher-review-status { align-items: flex-start; flex-direction: column; } }

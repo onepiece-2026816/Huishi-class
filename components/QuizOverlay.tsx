@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ControlRefs } from '../types';
-import { createQuizSession, getQuizResult, QuizSession, QuizQuestion } from '../services/quizData';
+import { createQuizSession, createQuizSessionFromQuestions, getQuizResult, QuizSession, QuizQuestion } from '../services/quizData';
 import { prepareXiaozhiSpeech, speakXiaozhi, stopXiaozhiSpeech } from '../services/xiaozhiSpeechService';
 import { X, Trophy, Star, Clock, CheckCircle2, XCircle, Zap, Sparkles, Loader2, SkipForward } from 'lucide-react';
 
@@ -11,15 +11,16 @@ interface QuizOverlayProps {
   cameraActive: boolean;
   onExit: () => void;
   subjectFilter?: string;
+  warmupQuestions?: QuizQuestion[];
   onComplete?: (result: ReturnType<typeof getQuizResult>, session: QuizSession) => void;
 }
 
 type QuizPhase = 'intro' | 'reading' | 'answering' | 'result' | 'summary';
 
 // ─── Component ───────────────────────────────────────────
-const QuizOverlay: React.FC<QuizOverlayProps> = ({ stageRef, controlRef, cameraActive, onExit, subjectFilter, onComplete }) => {
+const QuizOverlay: React.FC<QuizOverlayProps> = ({ stageRef, controlRef, cameraActive, onExit, subjectFilter, warmupQuestions, onComplete }) => {
   const [phase, setPhase] = useState<QuizPhase>('intro');
-  const [session, setSession] = useState<QuizSession>(() => createQuizSession(5, subjectFilter));
+  const [session, setSession] = useState<QuizSession>(() => warmupQuestions?.length ? createQuizSessionFromQuestions(warmupQuestions) : createQuizSession(5, subjectFilter));
   const [countdown, setCountdown] = useState(3);
   const [hoveredOption, setHoveredOption] = useState<number | null>(null);
   const [hoverProgress, setHoverProgress] = useState(0); // 0 to 1
@@ -527,7 +528,7 @@ const QuizOverlay: React.FC<QuizOverlayProps> = ({ stageRef, controlRef, cameraA
   const handleRestart = () => {
     stopXiaozhiSpeech();
     setVoiceError('');
-    setSession(createQuizSession(5, subjectFilter));
+    setSession(warmupQuestions?.length ? createQuizSessionFromQuestions(warmupQuestions) : createQuizSession(5, subjectFilter));
     setPhase('intro');
     setCountdown(3);
   };

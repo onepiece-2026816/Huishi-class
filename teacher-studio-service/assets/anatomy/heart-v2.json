@@ -1,0 +1,175 @@
+{
+  "profile": "heart-v2",
+  "organType": "heart",
+  "modelKind": "semantic-anatomy-template",
+  "partCount": 16,
+  "parts": [
+    {
+      "name": "myocardium",
+      "partKey": "myocardium",
+      "partLabel": "心肌外壳",
+      "labelEn": "Myocardium",
+      "layer": "anatomy",
+      "group": "myocardium",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "left_atrium",
+      "partKey": "left_atrium",
+      "partLabel": "左心房腔体",
+      "labelEn": "Left atrium cavity",
+      "layer": "anatomy",
+      "group": "chambers",
+      "semantic": true,
+      "teachingApproximation": true
+    },
+    {
+      "name": "right_atrium",
+      "partKey": "right_atrium",
+      "partLabel": "右心房腔体",
+      "labelEn": "Right atrium cavity",
+      "layer": "anatomy",
+      "group": "chambers",
+      "semantic": true,
+      "teachingApproximation": true
+    },
+    {
+      "name": "left_ventricle",
+      "partKey": "left_ventricle",
+      "partLabel": "左心室腔体",
+      "labelEn": "Left ventricle cavity",
+      "layer": "anatomy",
+      "group": "chambers",
+      "semantic": true,
+      "teachingApproximation": true
+    },
+    {
+      "name": "right_ventricle",
+      "partKey": "right_ventricle",
+      "partLabel": "右心室腔体",
+      "labelEn": "Right ventricle cavity",
+      "layer": "anatomy",
+      "group": "chambers",
+      "semantic": true,
+      "teachingApproximation": true
+    },
+    {
+      "name": "interatrial_septum",
+      "partKey": "interatrial_septum",
+      "partLabel": "房间隔",
+      "labelEn": "Interatrial septum",
+      "layer": "anatomy",
+      "group": "septa",
+      "semantic": true,
+      "teachingApproximation": true
+    },
+    {
+      "name": "interventricular_septum",
+      "partKey": "interventricular_septum",
+      "partLabel": "室间隔",
+      "labelEn": "Interventricular septum",
+      "layer": "anatomy",
+      "group": "septa",
+      "semantic": true,
+      "teachingApproximation": true
+    },
+    {
+      "name": "aorta",
+      "partKey": "aorta",
+      "partLabel": "主动脉",
+      "labelEn": "Aorta",
+      "layer": "anatomy",
+      "group": "vessels",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "pulmonary_arteries",
+      "partKey": "pulmonary_arteries",
+      "partLabel": "肺动脉干及分支",
+      "labelEn": "Pulmonary trunk and arteries",
+      "layer": "anatomy",
+      "group": "vessels",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "pulmonary_veins",
+      "partKey": "pulmonary_veins",
+      "partLabel": "肺静脉",
+      "labelEn": "Pulmonary veins",
+      "layer": "anatomy",
+      "group": "vessels",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "superior_vena_cava",
+      "partKey": "superior_vena_cava",
+      "partLabel": "上腔静脉",
+      "labelEn": "Superior vena cava",
+      "layer": "anatomy",
+      "group": "vessels",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "inferior_vena_cava",
+      "partKey": "inferior_vena_cava",
+      "partLabel": "下腔静脉",
+      "labelEn": "Inferior vena cava",
+      "layer": "anatomy",
+      "group": "vessels",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "mitral_valve",
+      "partKey": "mitral_valve",
+      "partLabel": "二尖瓣",
+      "labelEn": "Mitral valve",
+      "layer": "anatomy",
+      "group": "valves",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "tricuspid_valve",
+      "partKey": "tricuspid_valve",
+      "partLabel": "三尖瓣",
+      "labelEn": "Tricuspid valve",
+      "layer": "anatomy",
+      "group": "valves",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "aortic_valve",
+      "partKey": "aortic_valve",
+      "partLabel": "主动脉瓣",
+      "labelEn": "Aortic valve",
+      "layer": "anatomy",
+      "group": "valves",
+      "semantic": true,
+      "teachingApproximation": false
+    },
+    {
+      "name": "pulmonary_valve",
+      "partKey": "pulmonary_valve",
+      "partLabel": "肺动脉瓣",
+      "labelEn": "Pulmonary valve",
+      "layer": "anatomy",
+      "group": "valves",
+      "semantic": true,
+      "teachingApproximation": false
+    }
+  ],
+  "reference": {
+    "title": "Z-Anatomy",
+    "sourceUrl": "https://github.com/LluisV/Z-Anatomy",
+    "sampleUrl": "https://github.com/LluisV/Z-Anatomy-Sample",
+    "license": "CC BY-SA 4.0"
+  },
+  "notice": "教学用途，非诊断或测量用途。透明心腔与程序生成间隔为教学可视化近似。"
+}

@@ -5,7 +5,7 @@ export type TeachingModelLoadAction = 'ready' | 'reuse' | 'wait' | 'retry' | 'st
 export interface TeachingModelLoadSnapshot {
   targetModelId: TeachingModelId;
   targetModelUrl?: string;
-  activeContent: 'model' | 'biodigital';
+  activeContent: 'model' | 'biodigital' | 'interactive';
   activeModelId: TeachingModelId | null;
   activeModelUrl: string | null;
   loadedModelUrl: string | null;

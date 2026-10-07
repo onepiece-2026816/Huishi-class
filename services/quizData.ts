@@ -4,7 +4,7 @@
 
 import type { ModelInfoCategory } from './modelInfoProfiles';
 
-export type QuizCategory = ModelInfoCategory | '少儿兴趣';
+export type QuizCategory = ModelInfoCategory | '少儿兴趣' | 'model-warmup';
 
 export interface QuizQuestion {
   id: string;
@@ -17,6 +17,17 @@ export interface QuizQuestion {
   explanation: string;
   /** 2 = 二选一题，4 = 四选一题。UI 根据此字段决定排版与统计。 */
   optionType: 2 | 4;
+}
+
+export interface WarmupQuestion extends QuizQuestion {
+  category: 'model-warmup';
+  modelPartKeys: string[];
+  lessonId: string;
+  difficulty: '基础' | '进阶';
+  enabled: boolean;
+  source: 'generated' | 'teacher-edited';
+  objectiveIds?: string[];
+  activityId?: string;
 }
 
 export interface QuizSession {
@@ -2842,6 +2853,16 @@ export function createQuizSession(count: number = 5, modelUrlFilter?: string): Q
     questions,
     currentIndex: 0,
     answers: new Array(questions.length).fill(null),
+    startTime: Date.now(),
+  };
+}
+
+export function createQuizSessionFromQuestions(questions: QuizQuestion[]): QuizSession {
+  const selected = questions.filter((question) => question.options.length >= 2 && question.options.length <= 4).slice(0, 5);
+  return {
+    questions: selected,
+    currentIndex: 0,
+    answers: new Array(selected.length).fill(null),
     startTime: Date.now(),
   };
 }

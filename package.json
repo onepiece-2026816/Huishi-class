@@ -5,18 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently --kill-others-on-fail \"npm run dev:api\" \"npm run dev:web\"",
-    "dev:web": "vite",
+    "dev:web": "vite --configLoader runner",
     "dev:api": "node server/index.js",
     "start": "node server/index.js",
     "test:voice": "node --experimental-strip-types --test services/*.test.ts",
     "test:resource": "node --test server/resourceLibrarySeeds.test.js",
     "test:memory": "node --test server/learningMemory.test.js",
     "test:feedback": "node --test server/feedback.test.js",
+    "test:prep": "node --experimental-strip-types --test services/courseware*.test.ts services/lesson*.test.ts",
     "lod:heart": "node scripts/generate-interactive-lod.mjs --input public/models/heart-optimized.glb --output public/models/heart-interactive-lod.glb --target-triangles 225000",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build --configLoader runner",
+    "preview": "vite preview --configLoader runner"
   },
   "dependencies": {
+    "@google/model-viewer": "^4.1.0",
     "@mediapipe/tasks-vision": "^0.10.22-rc.20250304",
     "@openglobus/og": "^0.28.7",
     "@openglobus/openglobus-react": "^0.4.14",
@@ -25,6 +27,7 @@
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
+    "docx": "^9.8.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
@@ -40,6 +43,8 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
     "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^5.0.0",
     "concurrently": "^10.0.3",
     "tailwindcss": "^4.2.4",

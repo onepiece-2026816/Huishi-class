@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { HandLandmarker, DrawingUtils } from '@mediapipe/tasks-vision';
+import { CoursewareSwipeInput } from '../services/coursewareSwipeInput';
+import type { PageDirection } from '../services/coursewareSwipe';
 import { ControlRefs, GestureType, HandLandmarkPoint, InteractionMode, MoveDirection } from '../types';
 import {
   describeHandCandidate,
@@ -37,6 +39,7 @@ interface HandControllerProps {
   controlRef: React.MutableRefObject<ControlRefs>;
   onStateChange: (gesture: GestureType, direction: MoveDirection, isDragging: boolean) => void;
   onPerformanceSample?: (sample: HandTrackingPerformanceSample) => void;
+  onPageSwipe?: (direction: PageDirection) => void;
   interactionMode: InteractionMode;
   quizMode?: boolean;  // 新增：是否处于答题模式
 }
@@ -96,10 +99,21 @@ const HandController: React.FC<HandControllerProps> = ({
   controlRef,
   onStateChange,
   onPerformanceSample,
+  onPageSwipe,
   interactionMode,
   quizMode = false,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  // This project flips MediaPipe handedness for its legacy model controls.
+  // Semantic Right therefore corresponds to the raw Left hand used by the
+  // reference courseware swipe implementation.
+  const swipeRef = useRef(new CoursewareSwipeInput('Right'));
+  const pageSwipeCallbackRef = useRef(onPageSwipe);
+  const swipeDebugRef = useRef('');
+  useEffect(() => {
+    pageSwipeCallbackRef.current = onPageSwipe;
+    if (!onPageSwipe || quizMode) swipeRef.current.reset();
+  }, [onPageSwipe, quizMode]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -394,6 +408,7 @@ const HandController: React.FC<HandControllerProps> = ({
       const now = performance.now();
       const age = now - lastResultReceivedAtRef.current;
       if (age >= RESULT_STALE_TIMEOUT_MS) {
+        swipeRef.current.reset();
         // Advance the accepted timestamp so a delayed in-flight frame from
         // before the timeout is discarded instead of resurrecting stale input.
         lastResultTimestampRef.current = Math.max(lastResultTimestampRef.current, now);
@@ -899,6 +914,31 @@ const HandController: React.FC<HandControllerProps> = ({
 
       leftHandLandmarks = leftHandCandidate?.landmarks ?? null;
       rightHandLandmarks = rightHandCandidate?.landmarks ?? null;
+
+      let pageSwipeActive = false;
+      if (pageSwipeCallbackRef.current && !quizModeRef.current) {
+        const swipe = swipeRef.current.update(candidates, startTimeMs, (videoRef.current?.videoWidth || 640) / (videoRef.current?.videoHeight || 480));
+        pageSwipeActive = swipe.active;
+        if (import.meta.env.DEV) {
+          const state = `${swipe.phase}:${swipe.lockedDirection}:${swipe.reason}:${swipe.tracking}`;
+          if (state !== swipeDebugRef.current) {
+            console.debug('[courseware-swipe]', { at: startTimeMs, ...swipe });
+            swipeDebugRef.current = state;
+          }
+        }
+        if (swipe.direction) pageSwipeCallbackRef.current(swipe.direction);
+      }
+      if (pageSwipeActive) {
+        rightHandLandmarks = null;
+        smoothZoomRef.current = 0;
+        if (interactionModeRef.current === 'single') {
+          smoothRotVelRef.current = { x: 0, y: 0 };
+          rotationContinuityRef.current = createRotationContinuityState();
+          prevRotatePosRef.current = null;
+          prevRotateSampleAtRef.current = 0;
+          lastValidRotVelRef.current = { x: 0, y: 0 };
+        }
+      }
 
       if (trackedHands.controlEnabled) {
         // Keep semantic aliases available for single-hand fallback logic.

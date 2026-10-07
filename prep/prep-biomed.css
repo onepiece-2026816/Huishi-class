@@ -1,0 +1,50 @@
+.undergraduate-fields { border-left: 3px solid #18806d; padding-left: 16px; }
+.bio-toggles, .artifact-status, .artifact-downloads, .bio-visibility { display: flex; flex-wrap: wrap; gap: 10px; }
+.bio-toggles label { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.form-panel .bio-toggles input[type="checkbox"], .bio-parts input[type="checkbox"] { width: 16px; height: 16px; min-width: 16px; margin: 0; padding: 0; accent-color: #18806d; }
+.bio-toggles label { white-space: nowrap; }
+.artifact-status { padding: 12px 20px; border-block: 1px solid #e0e7e5; background: #f5f9f8; font-size: 12px; }
+.artifact-status span { color: #53616b; }
+.artifact-status [data-status="generated"] { color: #13755e; }
+.artifact-status [data-status="failed"], .artifact-status [data-status="unavailable"] { color: #a13736; }
+.artifact-status [data-status="generating"] { color: #0b6b9a; }
+.artifact-downloads { margin: 16px 0; }
+.artifact-downloads a { display: flex; align-items: center; gap: 6px; color: #136d60; font-weight: 600; padding: 8px 12px; border: 1px solid #b7cec9; border-radius: 4px; }
+.bio-parts { border: 0; border-top: 1px solid #d9e4e1; margin: 20px 0 0; padding: 16px 0; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.bio-parts legend { font-size: 13px; font-weight: 600; }
+.bio-parts label { display: grid; grid-template-columns: 20px minmax(0,1fr); align-items: center; column-gap: 5px; font-size: 13px; }
+.bio-parts small { grid-column: 2; font-size: 11px; color: #67767d; overflow-wrap: anywhere; }
+.bio-scope { border-left: 3px solid #bd8b35; background: #fff9ed; padding: 10px 12px; color: #655124; font-size: 12px; line-height: 1.8; }
+.bio-references { padding-left: 22px; font-size: 13px; line-height: 1.7; }
+.bio-references li { margin-bottom: 14px; overflow-wrap: anywhere; }
+.bio-references a { color: #176e74; }
+.bio-references small { display: block; color: #65727a; }
+.bio-render { width: 100%; aspect-ratio: 4/3; object-fit: contain; margin-top: 16px; background: #101416; }
+.bio-visibility { margin-top: 12px; }
+.bio-visibility button { font-size: 12px; }
+.bio-visibility button[aria-pressed="false"] { opacity: .55; }
+.biomed-panel .model-result { width: 100%; min-width: 0; }
+.biomed-panel model-viewer { display: block; width: 100%; height: 420px; background: #eef3f2; }
+.model-mode-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 14px; padding: 4px; background: #f2f7f8; border: 1px solid #dbe8e7; border-radius: 7px; }
+.model-mode-switch button { border: 0; border-radius: 5px; padding: 8px 9px; color: #607783; background: transparent; font-size: 11px; font-weight: 700; cursor: pointer; }
+.model-mode-switch button.active { color: #126d74; background: #fff; box-shadow: 0 2px 8px rgba(36,112,117,.12); }
+.multiview-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 13px; }
+.view-upload { position: relative; display: grid; gap: 5px; min-width: 0; min-height: 74px; align-content: center; justify-items: center; padding: 8px 5px; color: #4c7882; background: #f8fcfc; border: 1px dashed #a9d8d5; border-radius: 6px; text-align: center; cursor: pointer; }
+.view-upload:hover, .view-upload.ready { border-color: #42aaa7; background: #eefaf8; }
+.view-upload strong { font-size: 10px; }
+.view-upload small { max-width: 100%; overflow: hidden; color: #879da5; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.view-upload input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.model-hint { margin: 8px 0 0; color: #7b8d95; font-size: 10px; line-height: 1.55; }
+.image-model-downloads { display: flex; flex-wrap: wrap; gap: 2px 8px; }
+.part-summary { margin-top: 10px; padding: 10px 11px; border: 1px solid #dbe7e7; background: #f7fbfa; }
+.part-summary strong { display: block; color: #315c62; font-size: 11px; }
+.part-summary > div { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.part-summary span { padding: 4px 6px; color: #487078; background: #fff; border: 1px solid #d8e5e4; border-radius: 4px; font-size: 9px; }
+.part-summary small { display: block; margin-top: 7px; color: #81959a; font-size: 9px; }
+@media (max-width: 640px) {
+  .bio-parts { grid-template-columns: minmax(0,1fr); }
+  .artifact-status { padding: 12px; }
+  .biomed-panel model-viewer { height: 320px; }
+  .biomed-panel .primary-btn { white-space: normal; }
+  .multiview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

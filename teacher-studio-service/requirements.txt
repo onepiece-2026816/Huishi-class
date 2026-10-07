@@ -1,0 +1,4 @@
+numpy
+Pillow
+python-pptx
+trimesh==4.6.13
