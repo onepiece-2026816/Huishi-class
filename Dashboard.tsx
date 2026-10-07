@@ -189,6 +189,7 @@ const loadAppliedLessonContext = (userId: string | number): AppliedLessonContext
   }
 };
 const HIDDEN_RESOURCE_TAG_NAMES = new Set(['周田孩子作品']);
+const HIDDEN_RESOURCE_MODEL_KEYS = new Set(['chem-diamond', 'chem-diamond-cell', 'geo-terrain']);
 
 const RESOURCE_TAG_ICONS = {
   box: Box,
@@ -1190,7 +1191,12 @@ const App: React.FC<DashboardProps> = ({ playIntro = true, initialLocalModelId, 
     fetchResourceLibrary()
       .then((tags) => {
         if (cancelled) return;
-        const visibleTags = tags.filter((tag) => !HIDDEN_RESOURCE_TAG_NAMES.has(tag.name));
+        const visibleTags = tags
+          .filter((tag) => !HIDDEN_RESOURCE_TAG_NAMES.has(tag.name))
+          .map((tag) => ({
+            ...tag,
+            models: tag.models.filter((model) => !HIDDEN_RESOURCE_MODEL_KEYS.has(model.seedKey || getModelSeedKeyByUrl(model.url) || '')),
+          }));
         setResourceTags(visibleTags);
         setResourceLibraryError('');
         setExpandedCategories((current) => {
@@ -2941,9 +2947,6 @@ const App: React.FC<DashboardProps> = ({ playIntro = true, initialLocalModelId, 
         </div>
 
         <div className="lab-top-actions flex items-center gap-5">
-          <button type="button" className="lab-pill-button" onClick={onOpenModelGeneration}>
-            <Sparkles className="mr-1.5 text-ink/90" size={14} /> 3D建模生成
-          </button>
           <div className="lab-workspace-switch" role="tablist" aria-label="主工作区">
             <button type="button" role="tab" aria-selected={workspaceMode === 'classroom'} className={workspaceMode === 'classroom' ? 'is-active' : ''} onClick={() => setWorkspaceMode('classroom')}>
               <Box size={14} />课堂
